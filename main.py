@@ -32,10 +32,10 @@ cv2.namedWindow('dist')
 #HAAR FACE CASCADE
 #faceCascade = cv2.CascadeClassifier('/Users/nkumar/CSCode/Private Projects/ObjDetectTest/opencv/data/haarcascades/haarcascade_frontalface_default.xml')
 #LBP FACE CASCADE
-faceCascade = cv2.CascadeClassifier('/Users/nkumar/CSCode/Private Projects/ObjDetectTest/opencv/data/lbpcascades/lbpcascade_frontalface_improved.xml')
+faceCascade = cv2.CascadeClassifier('/Users/nkumar/BruinBot-Vision-AI/lbpcascades/lbpcascade_frontalface_improved.xml')
 #HAAR UPPER CASCADE
 #faceCascade = cv2.CascadeClassifier('/Users/nkumar/CSCode/Private Projects/ObjDetectTest/opencv/data/haarcascades/haarcascade_upperbody.xml')
-low_cascade = cv2.CascadeClassifier('/Users/nkumar/CSCode/Private Projects/ObjDetectTest/opencv/data/haarcascades/haarcascade_lowerbody.xml')
+low_cascade = cv2.CascadeClassifier('/Users/nkumar/BruinBot-Vision-AI/haarcascades/haarcascade_lowerbody.xml')
 
 #capture video stream from camera source. 0 refers to first camera, 1 referes to 2nd and so on.
 cap = cv2.VideoCapture(0)

@@ -14,7 +14,7 @@ img_path = sys.argv[1]
 # loading models
 face_detection = cv2.CascadeClassifier(detection_model_path)
 emotion_classifier = load_model(emotion_model_path, compile=False)
-EMOTIONS = ["angry","disgust","scared", "happy", "sad", "surprised","neutral"]
+EMOTIONS = ["angry","happy", "sad", "neutral"]
 
 
 #reading the frame
@@ -30,9 +30,9 @@ if len(faces) > 0:
     roi = roi.astype("float") / 255.0
     roi = img_to_array(roi)
     roi = np.expand_dims(roi, axis=0)
-    preds = emotion_classifier.predict(roi)[0]
-    emotion_probability = np.max(preds)
-    label = EMOTIONS[preds.argmax()]
+    yeet = emotion_classifier.predict(roi)
+    emotion_probability = np.max(yeet)[0]
+    label = EMOTIONS[yeet.argmax()]
     cv2.putText(orig_frame, label, (fX, fY - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
     cv2.rectangle(orig_frame, (fX, fY), (fX + fW, fY + fH),(0, 0, 255), 2)
     
