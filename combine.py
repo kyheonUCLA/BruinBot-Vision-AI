@@ -9,8 +9,8 @@ cv2.namedWindow('main')
 cv2.namedWindow('dist')
 
 EMOTIONS = ["angry" ,"disgust","scared", "happy", "sad", "surprised" ,"neutral"]
-faceCascade = cv2.CascadeClassifier('/Users/nkumar/BruinBot-Vision-AI/lbpcascades/lbpcascade_frontalface_improved.xml')
-legCascade = cv2.CascadeClassifier('/Users/nkumar/BruinBot-Vision-AI/haarcascades/haarcascade_lowerbody.xml')
+faceCascade = cv2.CascadeClassifier('./lbpcascades/lbpcascade_frontalface_improved.xml')
+legCascade = cv2.CascadeClassifier('./haarcascades/haarcascade_lowerbody.xml')
 emotion_model_path = '/Users/nkumar/BruinBot-Vision-AI/models/_mini_XCEPTION.106-0.65.hdf5'
 emotion_classifier = load_model(emotion_model_path, compile=False)
 
@@ -83,6 +83,7 @@ while True:
         for (x, y, w, h) in faces:
             facecount = facecount + 1
             cv2.rectangle(frame2, (x, y), (x+w, y+h), (0, 255, 0), 1)
+            print('face')
 
         cv2.putText(frame2, "No of faces {}".format(facecount), (50, 50), font, 1, (0, 0, 255), 1, cv2.LINE_AA)
 
