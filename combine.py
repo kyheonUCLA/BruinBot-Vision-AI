@@ -16,7 +16,7 @@ emotion_classifier = load_model(emotion_model_path, compile=False)
 
 cap = cv2.VideoCapture(0)
 triggered = False
-sdThresh = 10
+sdThresh = 5
 font = cv2.FONT_HERSHEY_SCRIPT_COMPLEX
 
 def distMap(frame1, frame2):
@@ -34,6 +34,9 @@ facecount = 0
 frame1 = imutils.resize(frame1, width=600)
 frame2 = imutils.resize(frame2, width=600)
 
+def blank():
+    
+
 while True:
     _, frame3 = cap.read()
     #reading the frame
@@ -41,6 +44,7 @@ while True:
     rows, cols, _ = np.shape(frame3)
     cv2.imshow('dist', frame3)
     dist = distMap(frame1, frame3)
+    #print("dist="+str(dist))
 
     frame1 = frame2
     frame2 = frame3
@@ -62,7 +66,8 @@ while True:
 
     faces = faceCascade.detectMultiScale(gray,scaleFactor=1.5,minNeighbors=1,minSize=(20,20),flags=cv2.CASCADE_SCALE_IMAGE)
     frameClone = frame3.copy() 
-
+    
+    gray = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
     lowers = legCascade.detectMultiScale(
         gray,
         scaleFactor=2,
@@ -72,6 +77,7 @@ while True:
     for (x, y, w, h) in lowers:
         facecount = facecount + 1
         cv2.rectangle(frame2, (x, y), (x+w, y+h), (0, 255, 0), 1)
+        blank()
         print('legs')
 
     gray = cv2.cvtColor(frame3, cv2.COLOR_BGR2GRAY)
@@ -83,6 +89,7 @@ while True:
         for (x, y, w, h) in faces:
             facecount = facecount + 1
             cv2.rectangle(frame2, (x, y), (x+w, y+h), (0, 255, 0), 1)
+            print("x="+str(x)+"y="+str(y)+"w="+str(w)+"h="+str(h))
             print('face')
 
         cv2.putText(frame2, "No of faces {}".format(facecount), (50, 50), font, 1, (0, 0, 255), 1, cv2.LINE_AA)
