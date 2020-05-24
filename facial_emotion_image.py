@@ -7,7 +7,7 @@ import sys
 
 # parameters for loading data and images
 detection_model_path = 'haarcascade_files/haarcascade_frontalface_default.xml'
-emotion_model_path = 'models/_mini_XCEPTION.106-0.65.hdf5'
+emotion_model_path = '/Users/nkumar/BruinBot-Vision-AI/models/_mini_XCEPTION.106-0.65.hdf5'
 img_path = sys.argv[1]
 
 # hyper-parameters for bounding boxes shape

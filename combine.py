@@ -6,7 +6,7 @@ import imutils
 from matplotlib import pyplot as plt
 
 cv2.namedWindow('main')
-cv2.namedWindow('dist')
+cv2.namedWindow('dist') #remove soon
 
 EMOTIONS = ["angry" ,"disgust","scared", "happy", "sad", "surprised" ,"neutral"]
 faceCascade = cv2.CascadeClassifier('./lbpcascades/lbpcascade_frontalface_improved.xml')
@@ -34,7 +34,7 @@ facecount = 0
 frame1 = imutils.resize(frame1, width=600)
 frame2 = imutils.resize(frame2, width=600)
 
-def blank():
+#def blank():
     
 
 while True:
@@ -77,7 +77,6 @@ while True:
     for (x, y, w, h) in lowers:
         facecount = facecount + 1
         cv2.rectangle(frame2, (x, y), (x+w, y+h), (0, 255, 0), 1)
-        blank()
         print('legs')
 
     gray = cv2.cvtColor(frame3, cv2.COLOR_BGR2GRAY)
@@ -111,6 +110,7 @@ while True:
             preds = emotion_classifier.predict(roi)[0]
             emotion_probability = np.max(preds)
             label = EMOTIONS[preds.argmax()]
+            print(label)
         else: continue
 
     
