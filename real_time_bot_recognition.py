@@ -5,6 +5,15 @@ import cv2
 import imutils
 from matplotlib import pyplot as plt
 
+import google.cloud
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+cred = credentials.Certificate("./fair-myth-274206-firebase-adminsdk-pqzrm-4129b96502.json")
+app = firebase_admin.initialize_app(cred)
+
+store = firestore.Client('fair-myth-274206')
+
 # parameters for loading data and images
 face_detection_model_path = 'haarcascade_files/haarcascade_frontalface_default.xml'
 leg_detection_model_path = 'haarcascades/haarcascade_lowerbody.xml'
@@ -46,6 +55,13 @@ while True:
         cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
         cv2.rectangle(frameClone, (fX, fY), (fX + fW, fY + fH),
                         (0, 0, 255), 2)
+        data = {
+            u'timestamp' : firestore.SERVER_TIMESTAMP,
+            u'emotion': str(label),
+            u'width': str(fW),
+            u'height': str(fH)
+        }
+        store.collection(u'Face').document().set(data, merge=True )
         print("faces," + label+","+str(fW)+","+str(fH))
     else: 
         cv2.imshow('main', frameClone)
@@ -63,6 +79,12 @@ while True:
         cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
         cv2.rectangle(frameClone, (fX, fY), (fX + fW, fY + fH),
                         (0, 0, 255), 2)
+        data = {
+            u'timestamp' : firestore.SERVER_TIMESTAMP,
+            u'width': str(fW),
+            u'height': str(fH)
+        }
+        store.collection(u'Legs').document().set(data, merge=True )                
         print("legs,"+"none,"+str(fW)+","+str(fH))
     else:
         cv2.imshow('main', frameClone)

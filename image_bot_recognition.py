@@ -13,7 +13,7 @@ from firebase_admin import credentials, firestore
 cred = credentials.Certificate("./fair-myth-274206-firebase-adminsdk-pqzrm-4129b96502.json")
 app = firebase_admin.initialize_app(cred)
 
-store = firestore.Client()
+store = firestore.Client('fair-myth-274206')
 
 
 # parameters for loading data and images
@@ -53,17 +53,17 @@ if len(faces) > 0:
     cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
     cv2.rectangle(orig_frame, (fX, fY), (fX + fW, fY + fH),
                     (0, 0, 255), 2)
-    labelStr = bytes(label)
-    widthStr = bytes(fW)
-    heightStr = bytes(fH)
+    labelStr = str(label)
+    widthStr = str(fW)
+    heightStr = str(fH)
     data = {
        u'timestamp' : firestore.SERVER_TIMESTAMP,
-       u'emotion': unicode(label),
-       u'width': unicode(widthStr),
-       u'height': unicode(heightStr)
+       u'emotion': str(label),
+       u'width': str(widthStr),
+       u'height': str(heightStr)
     }
     store.collection(u'Face').document().set(data, merge=True )
-    store.collection(u'Face').order_by(u'timestamp',u'asc')
+    #store.collection(u'Face').order_by(u'timestamp',u'asc')
     print("faces," + label+","+str(fW)+","+str(fH))
     cv2.imwrite('test_output/'+img_path.split('/')[-1],orig_frame)
 else:
@@ -88,7 +88,7 @@ if len(legs) > 0:
        u'height': unicode(heightStr)
     }
     store.collection(u'Legs').document().set(data, merge=True )
-    store.collection(u'Legs').order_by(u'timestamp',u'asc')
+    #store.collection(u'Legs').order_by(u'timestamp',u'asc')
     print("legs,"+"none,"+str(fW)+","+str(fH))
     cv2.imwrite('test_output/'+img_path.split('/')[-1],orig_frame)
 else:
