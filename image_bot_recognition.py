@@ -6,6 +6,10 @@ import imutils
 from matplotlib import pyplot as plt
 import sys
 
+from google.cloud import firestore
+
+db = firestore.Client()
+
 # parameters for loading data and images
 face_detection_model_path = 'haarcascade_files/haarcascade_frontalface_default.xml'
 leg_detection_model_path = 'haarcascade_files/haarcascade_lowerbody.xml'
@@ -43,6 +47,12 @@ if len(faces) > 0:
     cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
     cv2.rectangle(orig_frame, (fX, fY), (fX + fW, fY + fH),
                     (0, 0, 255), 2)
+    data = {
+        u'emotion': 'label',
+        u'width': u'fW',
+        u'height': u'fH'
+    }
+    db.collection(u'Face').document(u'Recog').set(data)
     print("faces," + label+","+str(fW)+","+str(fH))
     cv2.imwrite('test_output/'+img_path.split('/')[-1],orig_frame)
 else: 
