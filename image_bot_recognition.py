@@ -10,8 +10,11 @@ import google.cloud
 import firebase_admin
 from firebase_admin import credentials, firestore
 
+cred = credentials.Certificate("./fair-myth-274206-firebase-adminsdk-pqzrm-4129b96502.json")
+app = firebase_admin.initialize_app(cred)
 
-db = firestore.Client(credentials=credentials)
+store = firestore.Client()
+
 
 # parameters for loading data and images
 face_detection_model_path = 'haarcascade_files/haarcascade_frontalface_default.xml'
@@ -50,15 +53,20 @@ if len(faces) > 0:
     cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
     cv2.rectangle(orig_frame, (fX, fY), (fX + fW, fY + fH),
                     (0, 0, 255), 2)
+    labelStr = bytes(label)
+    widthStr = bytes(fW)
+    heightStr = bytes(fH)
     data = {
-        u'emotion': 'label',
-        u'width': u'fW',
-        u'height': u'fH'
+       u'timestamp' : firestore.SERVER_TIMESTAMP,
+       u'emotion': unicode(label),
+       u'width': unicode(widthStr),
+       u'height': unicode(heightStr)
     }
-    db.collection(u'Face').document(u'Recog').set(data)
+    store.collection(u'Face').document().set(data, merge=True )
+    store.collection(u'Face').order_by(u'timestamp',u'asc')
     print("faces," + label+","+str(fW)+","+str(fH))
     cv2.imwrite('test_output/'+img_path.split('/')[-1],orig_frame)
-else: 
+else:
     cv2.imshow('main', orig_frame)
 
 if len(legs) > 0:
@@ -74,12 +82,17 @@ if len(legs) > 0:
     cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
     cv2.rectangle(orig_frame, (fX, fY), (fX + fW, fY + fH),
                     (0, 0, 255), 2)
+    data = {
+       u'timestamp' : firestore.SERVER_TIMESTAMP,
+       u'width': unicode(widthStr),
+       u'height': unicode(heightStr)
+    }
+    store.collection(u'Legs').document().set(data, merge=True )
+    store.collection(u'Legs').order_by(u'timestamp',u'asc')
     print("legs,"+"none,"+str(fW)+","+str(fH))
     cv2.imwrite('test_output/'+img_path.split('/')[-1],orig_frame)
 else:
     cv2.imshow('main', orig_frame)
-
-
 
 cv2.imshow('main', orig_frame)
 if cv2.waitKey(1) & 0xFF == ord('q'):
