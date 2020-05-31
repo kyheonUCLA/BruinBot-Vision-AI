@@ -6,9 +6,12 @@ import imutils
 from matplotlib import pyplot as plt
 import sys
 
-from google.cloud import firestore
+import google.cloud
+import firebase_admin
+from firebase_admin import credentials, firestore
 
-db = firestore.Client()
+
+db = firestore.Client(credentials=credentials)
 
 # parameters for loading data and images
 face_detection_model_path = 'haarcascade_files/haarcascade_frontalface_default.xml'
