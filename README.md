@@ -7,6 +7,23 @@ The Vision and Behavior system consists of two subsystems that work concurrently
 
 The vision subsystem uses the attached camera to detect humans and their emotions. The script takes in live video feed and detects humans face and legs; once it detects a face, it will try to detect emotions. The software utilizes Tensorflow (Keras API) and OpenCV with Python. This information will allow the BruinBot to know if it should approach a person.
 
+### Instructions:
+#### Real Time Video
+* Clone github repo
+* Add in JSON Credentials in real_time_bot_recognition.py
+* Install necessary packages (tensorflow, numpy, opencv)
+* Run: python real_time_bot_recognition.py
+
+#### Image Recognition
+* Clone github repo
+* Add in JSON Credentials in image_bot_recognition.py
+* Install necessary packages (tensorflow, numpy, opencv)
+* Run: python image_bot_recognition.py "*path to image*"
+
+
+
+
+
 ## Voice:
 
 The voice subsystem uses the attached microphone and speaker to interact with the people. It uses Google Assistant API and Google Actions API to create a conversational user interface that can be run with a command to interact with a user.
