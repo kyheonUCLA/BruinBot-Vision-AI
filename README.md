@@ -1,5 +1,13 @@
-# FaceEmotion_ID
-Detects Face using Haarcascades and further detects emotion in bounded face (trained a CNN emotion detector model)
+# Vision and Voice Software for BruinBot
 
-The full application is explained in the following blog-post.
-https://appliedmachinelearning.blog/2018/11/28/demonstration-of-facial-emotion-recognition-on-real-time-video-using-cnn-python-keras/
+The Vision and Behavior system consists of two subsystems that work concurrently: vision and voice. The information from these two subsystems provide valuable information to make informed actions and reactions. All of these programs are combined and run from a single program that will be run as a server with an accessible API. Since the programs are computation heavy, the server will be run inside a Virtual Machine Instance inside Google Cloud Platform and be called by a program running on the Raspberry Pi on the BruinBot. The subsystems, server, and overall architecture are described below.
+
+
+## Vision:
+
+The vision subsystem uses the attached camera to detect humans and their emotions. The script takes in live video feed and detects humans face and legs; once it detects a face, it will try to detect emotions. The software utilizes Tensorflow (Keras API) and OpenCV with Python. This information will allow the BruinBot to know if it should approach a person.
+
+## Voice:
+
+The voice subsystem uses the attached microphone and speaker to interact with the people. It uses Google Assistant API and Google Actions API to create a conversational user interface that can be run with a command to interact with a user.
+
