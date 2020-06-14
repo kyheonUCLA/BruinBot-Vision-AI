@@ -9,20 +9,23 @@ The vision subsystem uses the attached camera to detect humans and their emotion
 
 ### Instructions:
 #### Real Time Video
+* If not on GCP Compute Engine, install Google Cloud SDK locally
 * Clone github repo
 * Add in JSON Credentials in real_time_bot_recognition.py
-* Install necessary packages (tensorflow, numpy, opencv)
+* Install necessary packages (tensorflow, numpy, opencv, google.cloud)
 * Run: python real_time_bot_recognition.py
 
 #### Image Recognition
+* If not on GCP Compute Engine, install Google Cloud SDK
 * Clone github repo
 * Add in JSON Credentials in image_bot_recognition.py
-* Install necessary packages (tensorflow, numpy, opencv)
+* Install necessary packages (tensorflow, numpy, opencv, google.cloud)
 * Run: python image_bot_recognition.py "*path to image*"
 
-
-
-
+#### Reading Output
+* Script will output to both Terminal and Firebase in following format:
+* For Face: face,*emotion*,*height of box*,*length of box*,timestamp
+* For Legs: legs,*height of box*,*length of box*,timestamp
 
 ## Voice:
 
