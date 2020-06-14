@@ -26,6 +26,7 @@ The vision subsystem uses the attached camera to detect humans and their emotion
 * Script will output to both Terminal and Firebase in following format:
 * For Face: face,*emotion*,*height of box*,*length of box*,timestamp
 * For Legs: legs,*height of box*,*length of box*,timestamp
+* If image is processed, outgoing image will be stored in /test_output
 
 ## Voice:
 
