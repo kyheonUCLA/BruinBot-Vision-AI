@@ -9,7 +9,7 @@ import google.cloud
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-cred = credentials.Certificate("./fair-myth-274206-firebase-adminsdk-pqzrm-4129b96502.json")
+cred = credentials.Certificate("") #ENTER PATH LOCATION TO CREDENTIALS HERE
 app = firebase_admin.initialize_app(cred)
 
 store = firestore.Client('fair-myth-274206')
@@ -88,7 +88,6 @@ while True:
         print("legs,"+"none,"+str(fW)+","+str(fH))
     else:
         cv2.imshow('main', frameClone)
-
 
 
     cv2.imshow('main', frameClone)
