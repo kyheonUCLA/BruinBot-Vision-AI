@@ -1,0 +1,11 @@
+matplotlib
+numpy
+firebase_admin
+python-firebase
+tensorflow
+google-cloud-storage
+google.cloud
+opencv-python
+keras
+flask
+flask_restful
