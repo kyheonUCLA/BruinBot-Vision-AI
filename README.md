@@ -29,6 +29,8 @@ The Vision and Behavior system consists of two subsystems that work concurrently
 ## Audio
 ### Run using the given instructions in the voice folder
 
+Link to the google actions project to set up locally
+https://console.actions.google.com/u/0/project/bruinbot-443ea/overview
 
 ## Individual
 
