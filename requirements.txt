@@ -9,3 +9,5 @@ opencv-python
 keras
 flask
 flask_restful
+gunicorn
+urrlib3

@@ -2,8 +2,37 @@
 
 The Vision and Behavior system consists of two subsystems that work concurrently: vision and voice. The information from these two subsystems provide valuable information to make informed actions and reactions. All of these programs are combined and run from a single program that will be run as a server with an accessible API. Since the programs are computation heavy, the server will be run inside a Virtual Machine Instance inside Google Cloud Platform and be called by a program running on the Raspberry Pi on the BruinBot. The subsystems, server, and overall architecture are described below.
 
+# Overall
 
-## Vision:
+## Cloud for Vision
+
+1. On camera, go to ./streaming and run `python stream.py`
+    - This will create a webserver that sends camera feed to localhost:5000
+    - Use app like ngrok to broadcast localhost:5000 to a pulic url
+        - Very simple to do: https://dashboard.ngrok.com/get-started/setup
+2. Next, ssh into the vm and install all requirements with `pip install -r requirements.txt`
+3. Then, in the vm run `gunicorn api:app -b 0.0.0.0:8080` to run the api server
+4. This will be accessible via EXTERNAL_API_ADDRESS:8000
+    - For now that is http://35.222.123.238:8080/
+
+## API
+- `POST /start`
+    - Needs one parameters
+    - {URL: camera url from step 1}
+    - Starts analysis using the camera and saves data to firestore
+- `GET /start`
+    - Run only after POST
+    - Gets the data from real time analysis
+- `GET /stop`
+    - Stops real time analysis
+
+## Audio
+### Run using the given instructions in the voice folder
+
+
+## Individual
+
+### Vision:
 
 The vision subsystem uses the attached camera to detect humans and their emotions. The script takes in live video feed and detects humans face and legs; once it detects a face, it will try to detect emotions. The software utilizes Tensorflow (Keras API) and OpenCV with Python. This information will allow the BruinBot to know if it should approach a person.
 
@@ -28,7 +57,7 @@ The vision subsystem uses the attached camera to detect humans and their emotion
 * For Legs: legs,*height of box*,*length of box*,timestamp
 * If image is processed, outgoing image will be stored in /test_output
 
-## Voice:
+### Voice:
 
 The voice subsystem uses the attached microphone and speaker to interact with the people. It uses Google Assistant API and Google Actions API to create a conversational user interface that can be run with a command to interact with a user.
 

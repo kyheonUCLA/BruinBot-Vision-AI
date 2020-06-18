@@ -9,13 +9,13 @@ import google.cloud
 import firebase_admin
 from firebase_admin import credentials, firestore
 import os
-import urllib.request
+from urllib2 import urlopen
 
 
 class RealTimeRecognition:
     def __init__(self, camera_url):
         # os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./key2.json" # ENTER PATH LOCATION IF RUN LOCALLY
-        cred = credentials.Certificate("./key2.json") #ENTER PATH LOCATION TO CREDENTIALS HERE
+        cred = credentials.Certificate("./key.json") #ENTER PATH LOCATION TO CREDENTIALS HERE
         app = firebase_admin.initialize_app(cred)
 
         self.store = firestore.Client('fair-myth-274206') # ENTER CLIENT ID
@@ -34,7 +34,7 @@ class RealTimeRecognition:
 
         self.camera_uri = camera_url
         self.total_bytes = b''
-        self.stream = urllib.request.urlopen(camera_url)
+        self.stream = urlopen(camera_url)
 
         # cv2.namedWindow("main")
         # self.camera = cv2.VideoCapture(0)
@@ -118,6 +118,6 @@ class RealTimeRecognition:
         # cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    rt = RealTimeRecognition("http://localhost:5000/video_feed")
+    rt = RealTimeRecognition("http://a644ec17e9d8.ngrok.io/video_feed")
     rt.start()
     
