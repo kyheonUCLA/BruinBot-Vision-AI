@@ -9,6 +9,7 @@ import google.cloud
 import firebase_admin
 from firebase_admin import credentials, firestore
 import os
+import sys
 from urllib2 import urlopen
 
 
@@ -118,6 +119,6 @@ class RealTimeRecognition:
         # cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    rt = RealTimeRecognition("http://a644ec17e9d8.ngrok.io/video_feed")
+    rt = RealTimeRecognition(sys.argv[1])
     rt.start()
     
