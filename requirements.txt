@@ -2,7 +2,7 @@ matplotlib
 numpy
 firebase_admin
 python-firebase
-tensorflow
+tensorflow==2.2
 google-cloud-storage
 google.cloud
 opencv-python
