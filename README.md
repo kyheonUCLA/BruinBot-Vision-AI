@@ -11,8 +11,9 @@ The Vision and Behavior system consists of two subsystems that work concurrently
     - Use app like ngrok to broadcast localhost:5000 to a pulic url
         - Very simple to do: https://dashboard.ngrok.com/get-started/setup
 2. Next, ssh into the vm and install all requirements with `pip install -r requirements.txt`
-3. Then, in the vm run `gunicorn api:app -b 0.0.0.0:8080` to run the api server
-4. This will be accessible via EXTERNAL_API_ADDRESS:8000
+3. You need to download json credentials from google cloud console and add path location in real_time_bot_recognition.py
+4. Then, in the vm run `sudo gunicorn api:app -b 0.0.0.0:8080` to run the api server
+5. This will be accessible via EXTERNAL_API_ADDRESS:8000
     - For now that is http://35.222.123.238:8080/
 
 ## API
