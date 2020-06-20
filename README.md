@@ -19,7 +19,7 @@ The Vision and Behavior system consists of two subsystems that work concurrently
 ## API
 - `POST /start`
     - Needs one parameters
-    - {URL: camera url from step 1}
+    - {URL: camera url ("...ngrok.io/video_feed") from step 1}
     - Starts analysis using the camera and saves data to firestore
 - `GET /start`
     - Run only after POST
