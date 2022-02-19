@@ -44,8 +44,7 @@ while True:
         label = EMOTIONS[preds.argmax()]
         cv2.putText(frameClone, label, (fX, fY - 10),
         cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
-        cv2.rectangle(frameClone, (fX, fY), (fX + fW, fY + fH),
-                        (0, 0, 255), 2)
+        cv2.rectangle(frameClone, (fX, fY), (fX + fW, fY + fH), (0, 0, 255), 2)
         print("faces," + label+","+str(fW)+","+str(fH))
     else: 
         cv2.imshow('main', frameClone)

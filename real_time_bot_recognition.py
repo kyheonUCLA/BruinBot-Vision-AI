@@ -10,12 +10,12 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 import os
 import sys
-from urllib2 import urlopen
+from urllib.request import urlopen
 
 
 class RealTimeRecognition:
     def __init__(self, camera_url):
-        # os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./key2.json" # ENTER PATH LOCATION IF RUN LOCALLY
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="./key.json" # ENTER PATH LOCATION IF RUN LOCALLY
         cred = credentials.Certificate("./key.json") #ENTER PATH LOCATION TO CREDENTIALS HERE
         app = firebase_admin.initialize_app(cred)
 
