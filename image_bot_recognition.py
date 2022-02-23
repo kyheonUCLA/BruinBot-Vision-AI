@@ -84,8 +84,8 @@ if len(legs) > 0:
                     (0, 0, 255), 2)
     data = {
        u'timestamp' : firestore.SERVER_TIMESTAMP,
-       u'width': unicode(widthStr),
-       u'height': unicode(heightStr)
+       u'width': (widthStr),
+       u'height': (heightStr)
     }
     store.collection(u'Legs').document().set(data, merge=True )
     #store.collection(u'Legs').order_by(u'timestamp',u'asc')
